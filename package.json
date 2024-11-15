@@ -2,22 +2,21 @@
   "name": "salon-manager-backend",
   "version": "0.0.0",
   "scripts": {
-    "build": "npx ts-node ./scripts/build.ts",
-    "dev": "SET NODE_ENV=development npx ts-node ./src",
+    "build": "node --env-file=./env/development.env -r ts-node/register ./scripts/build.ts",
+    "dev": "node --env-file=./env/development.env -r ts-node/register ./src",
     "dev:hot": "nodemon --exec \"npm run dev\" --watch ./src -e ts",
     "lint": "npx eslint ./src",
     "lint:tests": "npx eslint ./spec",
-    "start": "NODE_ENV=production node -r ./preload.js ./dist",
-    "test": "NODE_ENV=test npx ts-node ./spec",
+    "start": "node --env-file=./env/production.env -r ./preload.js ./dist",
+    "test": "node --env-file=./env/test.env -r ts-node/register ./spec",
     "test:hot": "nodemon --exec \"npm run test\" --watch ./src --watch ./spec -e ts"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=20.6.0"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
-    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-async-errors": "^3.1.1",
     "helmet": "^8.0.0",
